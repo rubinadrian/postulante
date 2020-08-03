@@ -1,0 +1,16 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.mat-menu-panel {
+  border-radius: 0px !important;
+}
+
+.icon_avatar {
+    color: #e0ddd5;
+    font-size: 40px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+

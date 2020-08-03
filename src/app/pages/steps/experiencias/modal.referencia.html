@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Referencia</h1>
+<div mat-dialog-content>
+    <form [formGroup]="formReferencia">
+
+        <mat-form-field>
+            <mat-label>Empresa</mat-label>
+            <input matInput formControlName="empresa" placeholder="empresa">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Nombre Contacto</mat-label>
+            <input matInput formControlName="contacto" placeholder="Nombre Contacto">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Tel&eacute;fono</mat-label>
+            <input matInput formControlName="telefono" placeholder="Telefono">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Observacion</mat-label>
+            <textarea matInput formControlName="observacion" placeholder="Observacion"></textarea>
+        </mat-form-field>
+
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="cancel()" cdkFocusInitial>Cancel</button>
+    <button mat-button [mat-dialog-close]="matDialogClose()" [disabled]="formReferencia.invalid">Aceptar</button>
+</div>

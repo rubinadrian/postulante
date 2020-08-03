@@ -1,0 +1,19 @@
+
+<mat-form-field>
+    <input matInput type="text" [(ngModel)]="line" class="line_phone" placeholder="Número" maxlength="10">
+</mat-form-field>
+
+<div id="recaptcha-container" data-size="compact" style=" transform:scale(0.77) !important;
+transform-origin:0 0 !important;"></div>
+
+<button mat-button (click)="sendLoginCode()" class="button_phone" [disabled]="line.length < 7 || !captchaValido">Ingresar por Móvil</button>
+
+<div *ngIf="windowRef.confirmationResult">
+    <hr>
+    <label for="code">Ingrese el código enviado al móvil (SMS)</label><br>
+    <mat-form-field>
+      <input matInput type="tel" name="code" [(ngModel)]="verificationCode">
+    </mat-form-field>
+
+    <button mat-button (click)="verifyLoginCode()" class="button_phone">Verificar</button>
+</div>

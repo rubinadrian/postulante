@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "Curriculum",
+      "public": "dist/Curriculum",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

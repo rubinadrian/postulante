@@ -1,0 +1,95 @@
+<app-header></app-header>
+
+
+
+<div class="main-back-container">
+
+  <div class="main-container" style="padding-bottom: 60px !important;">
+
+    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+    <mat-horizontal-stepper #stepper  *ngIf="!loading" (animationDone)="terminoAnimacion()" (selectionChange)="empezoAnimacion()">
+
+
+
+      <mat-step [stepControl]="formStepPersonal" [editable]="isEditable" state="step_personal">
+       <step-pesonal></step-pesonal>
+
+        <div class="cont_controls_steppers" [hidden]="!showControls">
+          <button mat-button matStepperNext>Siguiente</button>
+        </div>
+      </mat-step>
+
+
+      <mat-step [stepControl]="formStepFamiliares" [editable]="isEditable" state="step_familiares">
+        <step-familiares></step-familiares>
+
+        <div class="cont_controls_steppers" [hidden]="!showControls">
+          <button mat-button matStepperPrevious>Atras</button>
+          <button mat-button matStepperNext>Siguiente</button>
+        </div>
+      </mat-step>
+
+
+      <mat-step [stepControl]="formStepEstudios" [editable]="isEditable" state="step_estudios">
+        <step-estudios></step-estudios>
+
+        <div class="cont_controls_steppers" [hidden]="!showControls">
+          <button mat-button matStepperPrevious>Atras</button>
+          <button mat-button matStepperNext>Siguiente</button>
+        </div>
+      </mat-step>
+
+
+      <mat-step [stepControl]="formStepExperiencias" [editable]="isEditable" state="step_experiencias">
+        <step-experiencias></step-experiencias>
+
+        <div class="cont_controls_steppers" [hidden]="!showControls">
+          <button mat-button matStepperPrevious>Atras</button>
+          <button mat-button matStepperNext>Siguiente</button>
+        </div>
+      </mat-step>
+
+      <mat-step [stepControl]="formStepPreferencias" [editable]="isEditable" state="step_preferencias">
+        <step-preferencias></step-preferencias>
+
+        <div class="cont_controls_steppers" [hidden]="!showControls">
+          <button mat-button matStepperPrevious>Atras</button>
+          <button mat-button mat-raised-button color="primary" (click)="savePostulante()">Guardar</button>
+        </div>
+      </mat-step>
+
+
+
+      <!-- <mat-step state="step_final">
+        <p>Todo listo, dale a finalizar</p>
+        <div class="cont_controls_steppers" [hidden]="!showControls">
+          <button mat-button matStepperPrevious>Atras</button>
+          <button mat-button >Finalizar</button>
+        </div>
+      </mat-step> -->
+
+      <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+
+       <!-- Icon overrides. -->
+      <ng-template matStepperIcon="step_personal">
+        <mat-icon>account_circle</mat-icon>
+      </ng-template>
+      <ng-template matStepperIcon="step_familiares">
+        <mat-icon>family_restroom</mat-icon>
+      </ng-template>
+      <ng-template matStepperIcon="step_estudios">
+        <mat-icon>menu_book</mat-icon>
+      </ng-template>
+      <ng-template matStepperIcon="step_experiencias">
+        <mat-icon>streetview</mat-icon>
+      </ng-template>
+      <ng-template matStepperIcon="step_preferencias">
+        <mat-icon>tune</mat-icon>
+      </ng-template>
+      <ng-template matStepperIcon="step_final">
+        <mat-icon>outlined_flag</mat-icon>
+      </ng-template>
+
+    </mat-horizontal-stepper>
+  </div>
+</div>

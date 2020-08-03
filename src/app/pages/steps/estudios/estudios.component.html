@@ -1,0 +1,56 @@
+<h3>Estudios</h3>
+
+<form [formGroup]="formStepEstudios">
+  <div class="body_step">
+    <div class="cont_img_step">
+      <img src="assets/images/estudios.jpg">
+    </div>
+    <div class="cont_form_step" style="width: 100%;">
+
+
+      <h3 class="title_group_form_field">
+        <button mat-mini-fab color="primary" (click)="openDialogEstudio()">
+          <mat-icon>add</mat-icon>
+        </button>
+        Estudios
+      </h3>
+
+      <div class="cont_table">
+        <mat-table [dataSource]="dataSourceEstudios" >
+
+          <ng-container matColumnDef="nivel_estudio_id">
+            <mat-header-cell *matHeaderCellDef>Nivel</mat-header-cell>
+            <mat-cell *matCellDef="let estudio"> {{getNivelText(estudio.nivel_estudio_id)}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="institucion">
+            <mat-header-cell *matHeaderCellDef>Instituci&oacute;n</mat-header-cell>
+            <mat-cell *matCellDef="let estudio"> {{ estudio.institucion }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="completo">
+            <mat-header-cell *matHeaderCellDef>Completo</mat-header-cell>
+            <mat-cell *matCellDef="let estudio"> {{estudio.completo?'Si':'No'}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="titulo">
+            <mat-header-cell *matHeaderCellDef>T&iacute;tulo</mat-header-cell>
+            <mat-cell *matCellDef="let estudio"> {{estudio.titulo}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="tools">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let estudio" class="tools">
+              <mat-icon [inline]="true" (click)="editEstudio(estudio)">edit</mat-icon>
+              <mat-icon [inline]="true" (click)="delEstudio(estudio)">clear</mat-icon>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumnsEstudios"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsEstudios;"></mat-row>
+        </mat-table>
+      </div>
+
+    </div>
+  </div>
+</form>

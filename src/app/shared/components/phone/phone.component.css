@@ -1,0 +1,16 @@
+
+.mat-form-field {
+    width: 100%;
+}
+
+.button_phone {
+    width: 100%;
+    background-color: #2dc343;
+    color: white;
+    margin-top: 10px;
+}
+
+.mat-button:disabled {
+  background-color: #f4f4f4;
+}
+

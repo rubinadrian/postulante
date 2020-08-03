@@ -1,0 +1,168 @@
+<h3>Familia</h3>
+
+
+<form [formGroup]="formStepFamiliares">
+
+  <div class="body_step">
+    <div class="cont_img_step">
+      <img src="assets/images/familia.jpg">
+    </div>
+    <div class="cont_form_step">
+
+      <mat-form-field>
+        <mat-label>Estado Civil</mat-label>
+        <mat-select formControlName="estado_civil_id">
+          <mat-option *ngFor="let estadoCivil of estadosCiviles" [value]="estadoCivil.id">
+            {{estadoCivil.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Nombre Pareja/Cónyuge</mat-label>
+        <input matInput formControlName="nombre_pareja" placeholder="Nombre Pareja/Cónyuge">
+      </mat-form-field>
+
+      <!--Madre-->
+      <div class="cont_group_form_field">
+        <h3 class="title_group_form_field">Madre</h3>
+        <div formGroupName="madre" class="line_group_form_field">
+
+          <mat-form-field class="nombre">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre" placeholder="Nombre">
+          </mat-form-field>
+
+          <mat-form-field class="oficio">
+            <mat-label>Oficio</mat-label>
+            <input matInput formControlName="oficio" placeholder="Oficio">
+          </mat-form-field>
+
+          <mat-form-field class="vive">
+            <mat-label>Vive</mat-label>
+            <mat-select formControlName="vive">
+              <mat-option *ngFor="let v of siNo" [value]="v.value">
+                {{v.text}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <!--Padre-->
+      <div class="cont_group_form_field">
+        <h3 class="title_group_form_field">Padre</h3>
+        <div formGroupName="padre" class="line_group_form_field">
+          <mat-form-field class="nombre">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre" placeholder="Nombre">
+          </mat-form-field>
+
+
+          <mat-form-field class="oficio">
+            <mat-label>Oficio</mat-label>
+            <input matInput formControlName="oficio" placeholder="Oficio">
+          </mat-form-field>
+
+          <mat-form-field class="vive">
+            <mat-label>Vive</mat-label>
+            <mat-select formControlName="vive">
+              <mat-option *ngFor="let v of siNo" [value]="v.value">
+                {{v.text}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <h3 class="title_group_form_field">
+        <button mat-mini-fab color="primary" (click)="openDialogHijo()">
+          <mat-icon>add</mat-icon>
+        </button>
+        Hijos
+      </h3>
+
+
+      <div class="cont_table">
+        <mat-table [dataSource]="dataSourceHijos" *ngIf="dataSourceHijos.data.length > 0">
+
+          <ng-container matColumnDef="nombre">
+            <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+            <mat-cell *matCellDef="let hijo"> {{hijo.nombre}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="genero_id">
+            <mat-header-cell *matHeaderCellDef>Genero</mat-header-cell>
+            <mat-cell *matCellDef="let hijo">  {{ getTextGenero(hijo.genero_id) }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="edad">
+            <mat-header-cell *matHeaderCellDef>Edad</mat-header-cell>
+            <mat-cell *matCellDef="let hijo"> {{hijo.edad}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="tools">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let hijo" class="tools">
+                <mat-icon [inline]="true" (click)="editHijo(hijo)">edit</mat-icon>
+                <mat-icon [inline]="true" (click)="delHijo(hijo)">clear</mat-icon>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumnsHijos"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsHijos;"></mat-row>
+        </mat-table>
+      </div>
+
+      <h3 class="title_group_form_field">
+        <button mat-mini-fab color="primary" (click)="openDialogHermano()">
+          <mat-icon>add</mat-icon>
+        </button>
+        Hermanos
+      </h3>
+
+      <div class="cont_table">
+        <mat-table [dataSource]="dataSourceHermanos"  *ngIf="dataSourceHermanos.data.length > 0">
+
+          <ng-container matColumnDef="nombre">
+            <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+            <mat-cell *matCellDef="let hermano"> {{hermano.nombre}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="genero_id">
+            <mat-header-cell *matHeaderCellDef>Genero</mat-header-cell>
+            <mat-cell *matCellDef="let hermano"> {{ getTextGenero(hermano.genero_id) }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="edad">
+            <mat-header-cell *matHeaderCellDef>Edad</mat-header-cell>
+            <mat-cell *matCellDef="let hermano"> {{hermano.edad}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="oficio">
+            <mat-header-cell *matHeaderCellDef>Oficio</mat-header-cell>
+            <mat-cell *matCellDef="let hermano"> {{hermano.oficio}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="tools">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let hermano" class="tools">
+                <mat-icon [inline]="true" (click)="editHermano(hermano)">edit</mat-icon>
+                <mat-icon [inline]="true" (click)="delHermano(hermano)">clear</mat-icon>
+            </mat-cell>
+          </ng-container>
+
+
+          <mat-header-row *matHeaderRowDef="displayedColumnsHermanos"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsHermanos;"></mat-row>
+        </mat-table>
+      </div>
+
+    </div>
+  </div>
+
+
+
+</form>

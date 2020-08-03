@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "curriculum-ad57f": {
+      "hosting": {
+        "Curriculum": [
+          "curriculum-ad57f"
+        ]
+      }
+    }
+  }
+}

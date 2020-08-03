@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>Experiencias</h1>
+<div mat-dialog-content>
+    <form [formGroup]="formExperiencia">
+
+        <mat-form-field>
+            <mat-label>Empresa</mat-label>
+            <input matInput formControlName="empresa" placeholder="Empresa">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Area</mat-label>
+            <mat-select formControlName="area_laboral_id">
+                <mat-option *ngFor="let area of areas_laborales" [value]="area.id">
+                    {{area.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Funci&oacute;n</mat-label>
+            <input matInput formControlName="funcion" placeholder="Funcion">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Fecha Inicio</mat-label>
+            <input matInput [matDatepicker]="picker_inicio" formControlName='fecha_inicio' placeholder='Fecha Inicio'>
+            <mat-datepicker-toggle matSuffix [for]="picker_inicio"></mat-datepicker-toggle>
+            <mat-datepicker #picker_inicio></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Fecha Fin</mat-label>
+            <input matInput [matDatepicker]="picker_fin" formControlName='fecha_fin' placeholder='Fecha Fin'>
+            <mat-datepicker-toggle matSuffix [for]="picker_fin"></mat-datepicker-toggle>
+            <mat-datepicker #picker_fin></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Observacion</mat-label>
+            <textarea matInput formControlName="observacion" placeholder="Observacion"></textarea>
+        </mat-form-field>
+
+
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="cancel()" cdkFocusInitial>Cancel</button>
+    <button mat-button [mat-dialog-close]="matDialogClose()" [disabled]="formExperiencia.invalid">Aceptar</button>
+</div>

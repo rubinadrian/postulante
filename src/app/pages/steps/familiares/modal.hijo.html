@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Hijo</h1>
+<div mat-dialog-content>
+    <form [formGroup]="formHijo">
+    <mat-form-field class="nombre">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" placeholder="Nombre">
+    </mat-form-field>
+
+    <mat-form-field class="genero_id">
+        <mat-label>Genero</mat-label>
+        <mat-select formControlName="genero_id">
+            <mat-option *ngFor="let genero of generos" [value]="genero.id">
+                {{genero.nombre}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="edad">
+        <mat-label>Edad</mat-label>
+        <input matInput type="number" maxlength="3" formControlName="edad" placeholder="Edad">
+    </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="cancel()" cdkFocusInitial>Cancel</button>
+    <button mat-button [mat-dialog-close]="matDialogClose()" [disabled]="formHijo.invalid">Aceptar</button>
+</div>

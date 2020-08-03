@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>Estudio</h1>
+<div mat-dialog-content>
+    <form [formGroup]="formEstudio">
+
+    <mat-form-field>
+        <mat-label>Nivel Estudio</mat-label>
+        <mat-select formControlName="nivel_estudio_id">
+            <mat-option *ngFor="let nivel of niveles_estudios" [value]="nivel.id">
+                {{nivel.nombre}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Instituci&oacute;n</mat-label>
+        <input matInput formControlName="institucion" placeholder="Instituci&oacute;n">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Area</mat-label>
+        <mat-select formControlName="area_estudio_id">
+            <mat-option *ngFor="let area of areas_estudios" [value]="area.id">
+                {{area.nombre}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>T&iacute;tulo</mat-label>
+        <input matInput formControlName="titulo" placeholder="T&iacute;tulo">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Completo</mat-label>
+        <mat-select formControlName="completo">
+            <mat-option *ngFor="let v of siNo" [value]="v.value">
+            {{v.text}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="cancel()" cdkFocusInitial>Cancel</button>
+    <button mat-button [mat-dialog-close]="matDialogClose()" [disabled]="formEstudio.invalid">Aceptar</button>
+</div>

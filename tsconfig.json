@@ -11,6 +11,8 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
+    "resolveJsonModule": true, // Para importar json
+    "esModuleInterop": true, // Soluciona el problema del defaul en Json
     "lib": [
       "es2018",
       "dom"

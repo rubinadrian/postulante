@@ -1,0 +1,114 @@
+<h3>Datos Personales</h3>
+
+<form [formGroup]="formStepPersonal">
+  <div class="body_step">
+    <div class="cont_img_step">
+        <div class="cont_imagen_cv">
+            <div class="imagen_cv" (click)="imageInput.click()">
+                <mat-icon  *ngIf="!profileImagenBase64">portrait</mat-icon>
+                <img [src]="profileImagenBase64" width="102" height="102"  *ngIf="profileImagenBase64"/>
+                <input style="display: none" type="file" (change)="uploadImageFile($event)" #imageInput/>
+            </div>
+        </div>
+    </div>
+    <div class="cont_form_step">
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" placeholder="Nombre" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="apellido" placeholder="Apellido" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Domicilio</mat-label>
+        <input matInput formControlName="domicilio" placeholder="Domicilio" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Provincia</mat-label>
+        <mat-select
+          formControlName="provincia_id"
+          (selectionChange)="onSelectProvincia($event)"
+        >
+          <!-- <mat-option>--</mat-option> -->
+          <mat-option
+            *ngFor="let provincia of provincias"
+            [value]="provincia.id"
+          >
+            {{ provincia.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          type="text"
+          placeholder="Localidad"
+          matInput
+          formControlName="localidad_id"
+          [matAutocomplete]="autoLocalidad"
+        />
+        <mat-autocomplete
+          #autoLocalidad="matAutocomplete"
+          (closed)="seleccionAutomatica()"
+          [displayWith]="displayLocalidad.bind(this)"
+        >
+          <mat-option
+            *ngFor="let localidad of localidadesFiltradas | async"
+            [value]="localidad.id"
+          >
+            {{ localidad.nombre }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>DNI</mat-label>
+        <input matInput formControlName="dni" placeholder="DNI" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Fecha Nacimiento</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="fecha_nacimiento"
+          placeholder="Fecha Nacimiento"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Genero</mat-label>
+        <mat-select formControlName="genero_id">
+          <!-- <mat-option>--</mat-option> -->
+          <mat-option *ngFor="let genero of generos" [value]="genero.id">
+            {{ genero.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Email" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Celular</mat-label>
+        <input
+          matInput
+          formControlName="celular"
+          placeholder="Celular"
+        />
+      </mat-form-field>
+
+      <mat-checkbox ngDefaultControl formControlName="vivienda"
+        >Vivienda Propia</mat-checkbox
+      >
+    </div>
+  </div>
+</form>

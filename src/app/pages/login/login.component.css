@@ -1,0 +1,97 @@
+
+@media only screen and (max-width: 565px) {
+  .cont_buttons { padding: 8px 10px;}
+}
+
+.cont_buttons {
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  max-width: 350px;
+  /* margin: 0 auto; */
+  text-align: center;
+  padding: 8px 40px;
+}
+
+.cont_izq {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  background-position-x: right;
+  justify-content: center;
+  background-image: url('../../../assets/images/campo_ocaso_fulmiga.jpeg');
+  width: 100%;
+  background-size: cover;
+}
+
+.mat-button:disabled {
+  background-color: #f4f4f4;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-accordion {
+  margin: 20px 0px;
+  max-width: 280px;
+}
+
+.mat-expansion-panel-header-title {
+  color: #818181;
+}
+
+.cont_buttons button {
+  width: 100%;
+  margin: 8px 0px;
+}
+
+.account_icon {
+  align-self: center;
+  font-size: 80px;
+  height: 80px;
+  width: 80px;
+  color: darkgrey;
+  margin: 20px;
+}
+
+form {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input {
+  padding: 6px;
+  margin: 2px 0px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mat-divider {
+  margin: 10px 0px;
+}
+
+.cont_buttons span {
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.button_email_login {
+  background-color: #65b5bf;
+  color: white;
+  margin-left: 20px !important;
+}
+
+.button_google {
+  background-color: #d9534f;
+  color: white;
+}
+
+.button_facebook {
+  background-color: #3b5998;
+  color: white;
+}
+
+.button_twitter {
+  background-color: #1da1f2;
+  color: white;
+}

@@ -1,1 +1,277 @@
-/* You can add global styles to this file, and also import other style files */
+.bgcolor1 {
+  background-color: #6b6966;
+}
+
+.bgcolor2 {
+  background-color: #978f85;
+}
+
+.bgcolor3 {
+  background-color: #e0ddd5;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url(/assets/fonts/Roboto/Roboto-Light.ttf) format("truetype");
+  font-weight:300;
+}
+
+@font-face {
+  font-family: 'Monserrat';
+  src: url(/assets/fonts/Monserrat/Monserrat-Light.ttf) format("truetype");
+  font-weight:300;
+}
+
+@media print {
+  .no-print {
+      display: none;
+  }
+
+  .mat-divider {
+    display: none;
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0;
+  font-family: 'Roboto', "Helvetica Neue", sans-serif;
+  background-color: #e0ddd5;
+  color: rgb(97, 97, 97);
+}
+
+.cont_flex_line {
+  display: flex;
+  flex-direction: row;
+}
+
+.error {
+  padding: 20px 0px;
+  display: block;
+  color: red;
+}
+
+
+/* Header */
+
+.mat-toolbar.header {
+  background:rgba(29, 29, 29, 0.6);
+  border-bottom: 35px solid #978f85;
+  min-height: 160px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.mat-toolbar.header .mat-toolbar-row > img {
+  position: absolute;
+  top: 0px;
+}
+
+.example-icon {
+  padding: 0 14px;
+}
+
+
+/* End Header*/
+
+.mat-horizontal-stepper-header .mat-step-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.main-back-container {
+  /* background-image: linear-gradient(to right top, #38438b, #944b94, #d75a88, #ff7e71, #ffb25f, #ffeb68); */
+  /* background-image: linear-gradient(to right top, #6d327c, #485DA6, #00a1ba, #00BF98, #36C486); */
+  background-color:#e0ddd5;
+  padding: 0 20px;
+}
+
+.body_step {
+  text-align: start;
+  vertical-align:top;
+  display: flex;
+  width: 100%;
+}
+
+.cont_form_step {
+  /* max-width: calc(100% - 320px); */
+  vertical-align:top;
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cont_form_step > .mat-form-field {
+  width: 45%;
+}
+
+.cont_controls_steppers {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  border-top: 1px solid #ccc;
+  left: 0px;
+  padding: 10px 0px;
+  text-align: right;
+}
+
+
+.cont_controls_steppers .mat-button {
+  margin-right: 20px;
+}
+
+.mat-menu-panel {
+  border-radius: 0px !important;
+}
+
+
+.cont_img_step {
+  padding-right: 20px;
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+.cont_img_step > img {
+  display: block;
+  max-width: 200px;
+}
+
+
+.main-container {
+  position: relative;
+  top: -60px;
+  background-color: white;
+  max-width: 960px;
+  min-height: calc(100vh - 194px);
+  margin: 0 auto;
+  box-shadow: 2px 2px 13px 3px #626262;
+}
+
+.custom-dialog-container .mat-dialog-container .mat-form-field {
+  width: 100% !important;
+}
+
+.cont_group_form_field {
+  width: 100%;
+  border-left: 3px solid #1e88e5;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.title_group_form_field {
+  margin: 0px;;
+  width: 100%;
+}
+
+.line_group_form_field {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.line_group_form_field > .mat-form-field {
+  margin-right: 5px;
+}
+
+
+.title_group_form_field .mat-mini-fab {
+  box-sizing: border-box;
+  transform: scale(0.7);
+}
+
+.cont_table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.mat-table .tools {
+  justify-content: flex-end;
+  color: darkgrey;
+}
+
+.mat-table .tools .mat-icon{
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.mat-table .mat-cell {
+  font-family: 'Roboto';
+  color: rgba(0,0,0,0.54);
+  font-size: 12px;
+}
+
+.mat-table .mat-header-cell {
+  color: rgba(0, 0, 0, 0.60);
+  font-weight: 700;
+}
+
+.mat-table .tools .mat-icon:hover{
+  color: #616161;
+}
+
+.cont_checkbox_preferencias {
+  display: inline-flex;
+  width: 50%;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.mat-cell:first-of-type, .mat-header-cell:first-of-type, .mat-footer-cell:first-of-type {
+  padding-left: 0px;
+}
+
+.mat-cell:last-of-type, .mat-header-cell:last-of-type, .mat-footer-cell:last-of-type {
+  padding-right: 0px;
+}
+
+
+.hidde_column_mx { display: inherit;}
+
+@media only screen and (max-width: 865px) {
+  .body_step {
+    display: block;
+  }
+
+  .cont_img_step {
+    padding: 0px;
+  }
+
+  .cont_form_step {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 565px) {
+
+  .hidde_column_mx { display: none;}
+
+  .mat-form-field {
+    width: 100%;
+  }
+
+  .cont_form_step > .mat-form-field {
+    width: 100%;
+  }
+
+  .cont_img_step {
+    text-align: center;
+    margin: 20px 0px;
+    padding: 0px;
+  }
+
+  .cont_img_step img {
+    width: 100%;
+  }
+
+  :host ::ng-deep .mat-horizontal-stepper-header-container {
+    display: none !important;
+    overflow: hidden;
+  }
+
+  .cont_img_step > img {
+    margin: auto;
+  }
+
+  .cont_checkbox_preferencias {
+    width: 100%;
+  }
+}

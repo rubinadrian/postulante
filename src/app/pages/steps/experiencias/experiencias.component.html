@@ -1,0 +1,105 @@
+<h3>Experiencias</h3>
+
+<form [formGroup]="formStepExperiencias">
+  <div class="body_step">
+    <div class="cont_img_step">
+      <img src="assets/images/experiencias.jpg">
+    </div>
+    <div class="cont_form_step" style="width: 100%;">
+
+
+      <h3 class="title_group_form_field">
+        <button mat-mini-fab color="primary" (click)="openDialogExperiencia()">
+          <mat-icon>add</mat-icon>
+        </button>
+        Experiencias Laborales
+      </h3>
+
+      <div class="cont_table">
+        <mat-table [dataSource]="dataSourceExperiencias" >
+
+          <ng-container matColumnDef="empresa">
+            <mat-header-cell *matHeaderCellDef>Empresa</mat-header-cell>
+            <mat-cell *matCellDef="let experiencia"> {{experiencia.empresa}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="funcion">
+            <mat-header-cell *matHeaderCellDef>Funcion</mat-header-cell>
+            <mat-cell *matCellDef="let experiencia"> {{experiencia.funcion}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="fecha_inicio">
+            <mat-header-cell *matHeaderCellDef>Inicio</mat-header-cell>
+            <mat-cell *matCellDef="let experiencia"> {{ experiencia.fecha_inicio | date:'dd/MM/yyyy'}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="fecha_fin">
+            <mat-header-cell *matHeaderCellDef>Fin</mat-header-cell>
+            <mat-cell *matCellDef="let experiencia"> {{ experiencia.fecha_fin | date:'dd/MM/yyyy' }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="observacion">
+            <mat-header-cell *matHeaderCellDef>Observaci&oacute;n</mat-header-cell>
+            <mat-cell *matCellDef="let experiencia"> {{experiencia.observacion}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="tools">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let experiencia" class="tools">
+              <mat-icon [inline]="true" (click)="editExperiencia(experiencia)">edit</mat-icon>
+              <mat-icon [inline]="true" (click)="delExperiencia(experiencia)">clear</mat-icon>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumnsExperiencias"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsExperiencias;"></mat-row>
+        </mat-table>
+      </div>
+
+
+      <h3 class="title_group_form_field">
+        <button mat-mini-fab color="primary" (click)="openDialogReferencia()">
+          <mat-icon>add</mat-icon>
+        </button>
+        Referencias Laborales
+      </h3>
+
+      <div class="cont_table">
+        <mat-table [dataSource]="dataSourceReferencias" >
+
+          <ng-container matColumnDef="empresa">
+            <mat-header-cell *matHeaderCellDef>Empresa</mat-header-cell>
+            <mat-cell *matCellDef="let referencia"> {{referencia.empresa}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="contacto">
+            <mat-header-cell *matHeaderCellDef>Contacto</mat-header-cell>
+            <mat-cell *matCellDef="let referencia"> {{referencia.contacto}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="telefono">
+            <mat-header-cell *matHeaderCellDef>Tel&eacute;fono</mat-header-cell>
+            <mat-cell *matCellDef="let referencia"> {{referencia.telefono}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="observacion">
+            <mat-header-cell *matHeaderCellDef>Observaci&oacute;n</mat-header-cell>
+            <mat-cell *matCellDef="let referencia"> {{referencia.observacion}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="tools">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let referencia" class="tools">
+              <mat-icon [inline]="true" (click)="editReferencia(referencia)">edit</mat-icon>
+              <mat-icon [inline]="true" (click)="delReferencia(referencia)">clear</mat-icon>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumnsReferencias"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsReferencias;"></mat-row>
+        </mat-table>
+      </div>
+
+    </div>
+  </div>
+</form>

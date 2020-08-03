@@ -1,0 +1,67 @@
+<app-header></app-header>
+
+<div class="main-back-container">
+  <div class="main-container" style="display: flex;">
+    <div class="cont_izq">
+    </div>
+    <div class="cont_buttons">
+
+        <mat-icon class="account_icon">account_circle</mat-icon>
+        <span>Ingresa con tu cuenta para poder editar y mantener actualizado tus datos.</span>
+
+        <button mat-button (click)="login('google')" class="button_google">Ingresar con Google</button>
+        <button mat-button (click)="login('facebook')" class="button_facebook">Ingresar con Facebook</button>
+        <button mat-button (click)="login('twitter')" class="button_twitter">Ingresar con Twitter</button>
+
+        <mat-accordion>
+          <mat-expansion-panel hideToggle [expanded]="false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Ingresar con Email
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <!-- Form Email/Password -->
+            <form [formGroup]="form_login_email">
+              <mat-form-field>
+                <input matInput type="email" placeholder="Email" formControlName="email">
+                <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password">
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-hint>6 caracteres como minimo</mat-hint>
+              </mat-form-field>
+
+              <span class="error">{{ error }}</span>
+
+              <div class="cont_flex_line">
+                <button mat-button color="primary" (click)="createUserWithEmailAndPassword()" class="button_email_signin" [disabled]="form_login_email.invalid">Registrarse</button>
+                <button mat-button class="button_email_login" (click)="signInWithEmailAndPassword()" [disabled]="form_login_email.invalid">Ingresar</button>
+              </div>
+
+            </form>
+
+          </mat-expansion-panel>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Ingresar con Movil
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <!-- Form numero del movil -->
+            <app-phone></app-phone>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+
+
+    </div>
+
+
+
+  </div>
+</div>
+
+
+
