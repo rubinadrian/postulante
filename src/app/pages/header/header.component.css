@@ -6,6 +6,11 @@
   border-radius: 0px !important;
 }
 
+
+.mat-icon {
+  margin-top: -4px;;
+}
+
 .icon_avatar {
     color: #e0ddd5;
     font-size: 40px;
@@ -14,3 +19,18 @@
     cursor: pointer;
 }
 
+.mat-menu-item {
+  background-color: white;
+  font-family: 'Baloo';
+  width: 200px;
+  border-top: 1px solid #f5f5f5;
+}
+
+.mat-menu-item:last-child {
+  border-bottom: 1px solid #f5f5f5;
+}
+
+
+.red-icon {
+  color: #d84f4f;
+}

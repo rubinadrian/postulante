@@ -18,10 +18,14 @@ export class SaludoComponent implements OnInit {
         window.location.href = "https://www.facebook.com/cooperativaagropecuariaunion/";
         break;
       case 'instagram':
-        window.location.href = "https://www.instagram.com/coop_union/?hl=en";
+        window.location.href = "https://www.instagram.com/coop_union";
         break;
       case 'youtube':
         window.location.href = "https://www.youtube.com/channel/UCQDfPS3Gehq3GSeMCvPbAzA";
+        break;
+      case 'page':
+        window.location.href = "https://www.coopunion.com.ar";
+        break;
     }
   }
 

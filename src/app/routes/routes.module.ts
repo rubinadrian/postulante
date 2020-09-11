@@ -6,9 +6,11 @@ import { LoginGuard } from './guards/login.guard';
 import { ListaComponent } from '../pages/lista/lista.component';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { canActivate } from '@angular/fire/auth-guard';
-import { map } from 'rxjs/internal/operators/map';
 import { SaludoComponent } from '../pages/saludo/saludo.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AreaCoopunionComponent } from '../pages/area-coopunion/area-coopunion.component';
+import { AreaLaboralComponent } from '../pages/area-laboral/area-laboral.component';
+import { AreaEstudioComponent } from '../pages/area-estudio/area-estudio.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -19,6 +21,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'saludo', component: SaludoComponent,...canActivate(redirectUnauthorizedToLogin) },
   { path: 'lista', component: ListaComponent, canActivate: [AuthGuard]},
+  { path: 'areacoopunion', component: AreaCoopunionComponent,}, // canActivate: [AuthGuard]
+  { path: 'arealaboral', component: AreaLaboralComponent,}, // canActivate: [AuthGuard]
+  { path: 'areaestudio', component: AreaEstudioComponent,}, // canActivate: [AuthGuard]
   { path: '**', component: LoginComponent },
 ]; // sets up routes constant where you define your routes
 

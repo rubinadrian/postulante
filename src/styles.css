@@ -22,6 +22,12 @@
   font-weight:300;
 }
 
+@font-face {
+  font-family: 'Baloo';
+  src: url(/assets/fonts/Baloo/BalooTamma2-Regular.ttf) format("truetype");
+  font-weight:400;
+}
+
 @media print {
   .no-print {
       display: none;
@@ -186,6 +192,7 @@ body { margin: 0;
 .mat-table .tools {
   justify-content: flex-end;
   color: darkgrey;
+  text-align: right;
 }
 
 .mat-table .tools .mat-icon{

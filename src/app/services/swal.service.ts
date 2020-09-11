@@ -45,5 +45,19 @@ export class SwalService {
     })
   }
 
+  public showLoading() {
+    Swal.fire({
+      background: 'rgba(0,0,0,0) url(assets/images/campo_ocaso_fulmiga.jpeg)',
+      width: 600,
+      padding: '3em',
+      onBeforeOpen: () => {
+        Swal.showLoading()
+      }});
+  }
+
+  public close(){
+    Swal.close();
+  }
+
 
 }

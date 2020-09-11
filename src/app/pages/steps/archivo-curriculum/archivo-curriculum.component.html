@@ -1,0 +1,22 @@
+<h3>Curr&iacute;culum</h3>
+
+<div class="body_step">
+  <div class="cont_img_step">
+      <img src="assets/images/curriculum.jpg">
+  </div>
+
+  <div class="cont_form_step" style="flex-grow: 8;">
+    <div style="height: 80px;  width: 100%; color:#e1e1e1">
+      <mat-icon style="font-size: 80px;">cloud_upload</mat-icon>
+    </div>
+
+    <div>
+      <h5 style="font-weight: 100; margin-bottom: 10px;">Opcionalmente puedes enviarnos un curr&iacute;culum que tengas creado con Word o en PDF.</h5>
+      <form>
+        <button mat-raised-button (click)="openInput()">Seleccionar Archivo</button>
+        <input #fileInput hidden type="file" (change)="fileChange($event.target.files)" accept=".doc,.docx,.pdf">
+      </form>
+    </div>
+  </div>
+</div>
+

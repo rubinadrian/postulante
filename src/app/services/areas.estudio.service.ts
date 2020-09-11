@@ -25,6 +25,16 @@ export class AreasEstudioService {
     return new BehaviorSubject(this.areas).pipe(first());
   }
 
+
+  saveArea(data) {
+    return this.http.post(this.url + 'areasestudios/update', data);
+  }
+
+  delArea(data) {
+    return this.http.post(this.url + 'areasestudios/remove', data);
+  }
+
+
   getAreasFromStorage() {
     let dateLS = window.localStorage.getItem('date_areas_estudios');
     if(dateLS && +new Date().getTime() - +new Date(+dateLS).getTime() > (60*60*24*1000)) {

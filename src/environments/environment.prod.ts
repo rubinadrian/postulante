@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  url: 'http://back.postulante.esy.es/index.php/api/',
+  url: 'http://www.coopunion.com.ar/postulante/back/public/index.php/api/',
   firebase: {
     apiKey: "AIzaSyBzUQTB50fuZDZl0tJ89tXhvRV8Qra4Hks",
     authDomain: "curriculum-ad57f.firebaseapp.com",

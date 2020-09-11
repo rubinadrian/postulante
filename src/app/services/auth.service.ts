@@ -7,6 +7,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { BehaviorSubject } from 'rxjs';
+import { SwalService } from './swal.service';
 
 
 @Injectable({
@@ -18,48 +20,41 @@ export class AuthService {
   public user:any = {};
   public isAdmin = false;
   public token = '';
+  public getUserLoggedIn:BehaviorSubject<any>;
 
 
   constructor(private http:HttpClient,
               public _auth: AngularFireAuth,
-              private router:Router) {
-
+              private router:Router,
+              private _swal:SwalService) {
+    this.getUserLoggedIn = new BehaviorSubject<any>(null);
     _auth.authState.subscribe((userFireBase:firebase.User) => {
-      console.log('1', userFireBase);
+
       if(!userFireBase) { return; }
-      console.log('2', userFireBase);
+
       userFireBase.getIdToken().then(token => {
         this.token = token;
-        console.log('3', userFireBase);
 
+        this._swal.showLoading();
         this.http.post(this.url + 'login',{token}).pipe(first()).subscribe((resp:any) => {
+          this._swal.close();
           if(resp === 1) { this.isAdmin = true; }
-          console.log('4', userFireBase);
+
           this.user.uid = userFireBase.uid;
           this.user.displayName = userFireBase.displayName;
           this.user.email = userFireBase.email;
           this.user.photoURL = userFireBase.photoURL;
           this.logueado = true;
-
-          if(router.routerState.snapshot.url != '/lista') {
-            this.router.navigate(['home']);
-          }
+          this.getUserLoggedIn.next(this.user);
+          //this.getUserLoggedIn.complete();
+        }, error => {
+          this._swal.close();
+          this._swal.error('Error Login', 'Probrema con la conexion, vuelva a intentarlo mas tarde.');
         });
 
       });
 
     });
-  }
-
-
-
-  isLoggedIn() {
-     return this._auth.authState.pipe(first()).toPromise();
-  }
-
-  async getUserLoggedIn() {
-     const user = await this.isLoggedIn();
-     return user;
   }
 
   login(proveedor: string) {

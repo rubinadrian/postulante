@@ -11,6 +11,7 @@ import { GenerosService } from '../../../services/generos.service';
 import { SwalService } from '../../../services/swal.service';
 import { AuthService } from '../../../services/auth.service';
 import { Personal } from 'src/app/models/interfaces';
+import { LoadingService } from '../../../services/loading.service';
 
 
 @Component({
@@ -44,7 +45,6 @@ export class PersonalesComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
     // Formulario Datos Personales
     this.formStepPersonal = this._formBuilder.group({
       nombre: ['', Validators.required],

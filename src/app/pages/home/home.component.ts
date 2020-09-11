@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit {
 
 
   getPostulanteByUser() {
-    this._auth.getUserLoggedIn().then(user => {
+    this._auth.getUserLoggedIn.subscribe((user:any) => {
       if(user) {
         this.uid = user.uid;
         this._ps.getPostulante(user.uid).subscribe(data => {
@@ -140,7 +140,7 @@ export class HomeComponent implements OnInit {
 
 
   savePostulante() {
-    this._auth.getUserLoggedIn().then(user => {
+    this._auth.getUserLoggedIn.subscribe((user:any) => {
       if(user) {
 
         this.uid = user.uid;

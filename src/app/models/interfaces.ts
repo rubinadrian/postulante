@@ -166,3 +166,8 @@ export interface AreaEstudio {
   id: number;
   nombre: string;
 }
+
+export interface Area {
+  id: number,
+  nombre: string;
+};

@@ -7,7 +7,9 @@
             <img src="assets/images/preferencias.jpg">
         </div>
         <div class="cont_form_step">
-
+            <p style="font-style: italic;">
+              En que sección de la cooperativa te gustaría trabajar?
+            </p>
             <div formArrayName="preferencias" class="preferencias">
                 <div *ngFor="let a of areasCtrls; index as i" class="cont_checkbox_preferencias">
                         <mat-checkbox [formControlName]="i">{{a.nombre}}</mat-checkbox>

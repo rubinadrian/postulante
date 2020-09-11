@@ -1,7 +1,5 @@
 <app-header></app-header>
 
-
-
 <div class="main-back-container">
 
   <div class="main-container" style="padding-bottom: 60px !important;">
@@ -54,7 +52,16 @@
 
         <div class="cont_controls_steppers" [hidden]="!showControls">
           <button mat-button matStepperPrevious>Atras</button>
-          <button mat-button mat-raised-button color="primary" (click)="savePostulante()">Guardar</button>
+          <button mat-button matStepperNext>Siguiente</button>
+        </div>
+      </mat-step>
+
+      <mat-step [stepControl]="formStepPreferencias" [editable]="isEditable" state="step_curriculum">
+        <step-curriculum-file></step-curriculum-file>
+
+        <div class="cont_controls_steppers" [hidden]="!showControls">
+          <button mat-button matStepperPrevious>Atras</button>
+          <button mat-button mat-raised-button color="primary" (click)="savePostulante()">Postularme</button>
         </div>
       </mat-step>
 
@@ -85,6 +92,9 @@
       </ng-template>
       <ng-template matStepperIcon="step_preferencias">
         <mat-icon>tune</mat-icon>
+      </ng-template>
+      <ng-template matStepperIcon="step_curriculum">
+        <mat-icon>attach_file</mat-icon>
       </ng-template>
       <ng-template matStepperIcon="step_final">
         <mat-icon>outlined_flag</mat-icon>

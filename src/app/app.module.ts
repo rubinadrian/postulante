@@ -21,6 +21,8 @@ import { ModalEstudioComponent } from './pages/steps/estudios/modal.estudio.comp
 import { ModalReferenciaComponent } from './pages/steps/experiencias/modal.referencia.component';
 import { ModalExperienciaComponent } from './pages/steps/experiencias/modal.experiencia.component';
 
+import { MatCarouselModule } from '@ngmodule/material-carousel';
+
 
 /** PARA EL FORMATO DE LAS FECHAS */
 import{MatDateFormats, MAT_DATE_FORMATS, NativeDateAdapter, DateAdapter} from '@angular/material/core';
@@ -37,9 +39,12 @@ import { ListaComponent } from './pages/lista/lista.component';
 import { SaludoComponent } from './pages/saludo/saludo.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './services/interceptor.service';
-import { AreaCoopunionComponent } from './Pages/area-coopunion/area-coopunion.component';
-import { AreaLaboralComponent } from './Pages/area-laboral/area-laboral.component';
-import { AreaEstudioComponent } from './Pages/area-estudio/area-estudio.component';
+import { AreaCoopunionComponent } from './pages/area-coopunion/area-coopunion.component';
+import { AreaLaboralComponent } from './pages/area-laboral/area-laboral.component';
+import { AreaEstudioComponent } from './pages/area-estudio/area-estudio.component';
+import { SpinnerComponent } from './shared/components/spinner/spinner.component';
+import { ModalAreasComponent } from './shared/components/modal-areas/modal-areas.component';
+import { ArchivoCurriculumComponent } from './pages/steps/archivo-curriculum/archivo-curriculum.component';
 
 firebase.initializeApp(environment.firebase);
 //--------
@@ -82,6 +87,9 @@ const MY_DATE_FORMATS = {
     AreaCoopunionComponent,
     AreaLaboralComponent,
     AreaEstudioComponent,
+    SpinnerComponent,
+    ModalAreasComponent,
+    ArchivoCurriculumComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +102,7 @@ const MY_DATE_FORMATS = {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    MatCarouselModule.forRoot(),
   ],
   providers: [
     {
