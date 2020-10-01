@@ -57,11 +57,11 @@
       </mat-step>
 
       <mat-step [stepControl]="formStepPreferencias" [editable]="isEditable" state="step_curriculum">
-        <step-curriculum-file></step-curriculum-file>
+        <step-curriculum-file (uploading)="uploadingCurriculum($event)"></step-curriculum-file>
 
         <div class="cont_controls_steppers" [hidden]="!showControls">
           <button mat-button matStepperPrevious>Atras</button>
-          <button mat-button mat-raised-button color="primary" (click)="savePostulante()">Postularme</button>
+          <button mat-button mat-raised-button color="primary" (click)="savePostulante()" [disabled]="isUploading">Postularme</button>
         </div>
       </mat-step>
 

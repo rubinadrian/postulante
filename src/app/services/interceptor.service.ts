@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { delay } from 'rxjs/internal/operators/delay';
 import { AuthService } from './auth.service';
 import { LoadingService } from './loading.service';
+import { catchError, retry } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,39 +16,42 @@ export class InterceptorService implements HttpInterceptor  {
   constructor(private _auth:AuthService, private _loading:LoadingService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
-    let params = req.clone().params;
 
-    // Agrego el token a todas las peticiones.
     if(this._auth.token) {
-      params = params.append('token', this._auth.token);
+      req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + this._auth.token) });
     }
 
-    let reqWithToken = req.clone({ params });
-
     // Armo un array de peticiones,si esta vacio, no estoy leyendo (loading).
-    this.requests.push(reqWithToken);
+    this.requests.push(req);
 
     return Observable.create(observer => {
-      const subscription = next.handle(reqWithToken)
-          .pipe(delay(100))
+      const subscription = next.handle(req)
+          .pipe(delay(100),
+          catchError((err: any) => {
+            if(err.status == 401 || err.status === 0) {
+                return next.handle(req).pipe(retry(5));
+            } else {
+                return throwError(err);
+            }
+        }))
           .subscribe(
               event => {
                   if (event instanceof HttpResponse) {
-                      this.removeRequest(reqWithToken);
+                      this.removeRequest(req);
                       observer.next(event);
                   }
               },
               err => {
-                  this.removeRequest(reqWithToken);
+                  this.removeRequest(req);
                   observer.error(err);
               },
               () => {
-                  this.removeRequest(reqWithToken);
+                  this.removeRequest(req);
                   observer.complete();
               });
       // remove request from queue when cancelled
       return () => {
-          this.removeRequest(reqWithToken);
+          this.removeRequest(req);
           subscription.unsubscribe();
       };
   });

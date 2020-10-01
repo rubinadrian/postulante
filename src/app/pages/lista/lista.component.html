@@ -89,6 +89,30 @@
         </mat-select>
       </mat-form-field>
 
+      <mat-form-field>
+        <mat-label>Fecha Carga Desde</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker_desde"
+          formControlName="fecha_desde"
+          placeholder="Fecha Carga Desde"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker_desde"></mat-datepicker-toggle>
+        <mat-datepicker #picker_desde></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Fecha Carga Hasta</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker_hasta"
+          formControlName="fecha_hasta"
+          placeholder="Fecha Carga Hasta"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker_hasta"></mat-datepicker-toggle>
+        <mat-datepicker #picker_hasta></mat-datepicker>
+      </mat-form-field>
+
 
         <mat-checkbox formControlName="completo" style="font-size: 12px;margin-right: 20px;">Estudios completos</mat-checkbox>
         <mat-checkbox formControlName="vivienda" style="font-size: 12px;margin-right: 20px;">Vivienda</mat-checkbox>

@@ -5,9 +5,9 @@
     <div class="cont_izq">
       <mat-carousel
       *ngIf="showCarousel"
-      timings="250ms ease-in"
+      timings="150ms ease-in"
       [autoplay]="true"
-      interval="5000"
+      interval="2000"
       color="accent"
       maxWidth="auto"
       [proportion]="proportion"
@@ -34,12 +34,17 @@
         <mat-icon class="account_icon">account_circle</mat-icon>
         <span>Ingresa con tu cuenta para poder editar y mantener actualizado tus datos.</span>
 
-        <button mat-button (click)="login('google')" class="button_google">Ingresar con Google</button>
-        <button mat-button (click)="login('facebook')" class="button_facebook">Ingresar con Facebook</button>
-        <button mat-button (click)="login('twitter')" class="button_twitter">Ingresar con Twitter</button>
+        <div *ngIf="!(isExpandedMail || isExpandedPhone)">
+          <button mat-button (click)="login('google')" class="button_google">Ingresar con Google</button>
+          <button mat-button (click)="login('facebook')" class="button_facebook">Ingresar con Facebook</button>
+          <button mat-button (click)="login('twitter')" class="button_twitter">Ingresar con Twitter</button>
+        </div>
 
-        <mat-accordion>
-          <mat-expansion-panel hideToggle [expanded]="false">
+        <mat-accordion #accordion="matAccordion">
+          <mat-expansion-panel hideToggle [expanded]="false"
+          (opened)="isExpandedMail=!isExpandedMail"
+          (closed)="isExpandedMail=!isExpandedMail"
+          >
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Ingresar con Email
@@ -63,11 +68,16 @@
                 <button mat-button color="primary" (click)="createUserWithEmailAndPassword()" class="button_email_signin" [disabled]="form_login_email.invalid">Registrarse</button>
                 <button mat-button class="button_email_login" (click)="signInWithEmailAndPassword()" [disabled]="form_login_email.invalid">Ingresar</button>
               </div>
+              <div class="cont_flex_line">
+                <button mat-stroked-button color="warn" (click)="sendPasswordResetEmail()" class="button_email_signin" *ngIf="errorUserPassword" [disabled]="form_login_email.controls.email.errors">Recuperar Usuario</button>
+              </div>
 
             </form>
 
           </mat-expansion-panel>
-          <mat-expansion-panel hideToggle>
+          <mat-expansion-panel hideToggle
+          (opened)="isExpandedPhone=!isExpandedPhone"
+          (closed)="isExpandedPhone=!isExpandedPhone">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Ingresar con Movil

@@ -1,14 +1,17 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, HostListener } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import { PersonalesComponent } from '../steps/personal/personales.component';
 import { FamiliaresComponent } from '../steps/familiares/familiares.component';
-import { MatStepper } from '@angular/material/stepper';
 import { EstudiosComponent } from '../steps/estudios/estudios.component';
 import { ExperienciasComponent } from '../steps/experiencias/experiencias.component';
 import { PreferenciasComponent } from '../steps/preferencias/preferencias.component';
+// import { ArchivoCurriculumComponent } from '../steps/archivo-curriculum/archivo-curriculum.component';
+
 import { PostulanteService } from 'src/app/services/postulante.service';
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { SwalService } from '../../services/swal.service';
 import { SizeScreenService } from '../../services/size-screen.service';
@@ -42,6 +45,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(EstudiosComponent) stepEstudios: EstudiosComponent;
   @ViewChild(ExperienciasComponent) stepExperiencias: ExperienciasComponent;
   @ViewChild(PreferenciasComponent) stepPreferencias: PreferenciasComponent;
+  // @ViewChild(ArchivoCurriculumComponent) stepArchivoCurriculum: ArchivoCurriculumComponent;
   @ViewChild('stepper') stepper: MatStepper;
 
   constructor(
@@ -55,6 +59,7 @@ export class HomeComponent implements OnInit {
 
   isEditable = true;
   showControls = true;
+  isUploading = false;
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -65,7 +70,10 @@ export class HomeComponent implements OnInit {
         this.getPostulanteByUser();
       }
     });
+  }
 
+  uploadingCurriculum(isUploading:boolean) {
+    this.isUploading = isUploading;
   }
 
   getPostulanteById(id) {
@@ -155,11 +163,16 @@ export class HomeComponent implements OnInit {
           experiencias: this.formStepExperiencias.value,
           preferencias: this.stepPreferencias.getPreferenciasSeleccionadas(),
         };
-
+        this.loading = true;
         this._ps.savePostulante(postulante).subscribe(resp => {
             if(!this._auth.isAdmin) {
+              this.loading = false;
               this.router.navigate(['/saludo']);
             } else {
+              this._ps.getPostulanteById(this.id).subscribe(data => {
+                this.setValuesStepsForms(data);
+                this.loading = false;
+              });
               this.swal.saveSuccessful();
             }
         });

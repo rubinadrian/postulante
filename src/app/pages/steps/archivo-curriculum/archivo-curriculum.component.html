@@ -13,7 +13,8 @@
     <div>
       <h5 style="font-weight: 100; margin-bottom: 10px;">Opcionalmente puedes enviarnos un curr&iacute;culum que tengas creado con Word o en PDF.</h5>
       <form>
-        <button mat-raised-button (click)="openInput()">Seleccionar Archivo</button>
+        <mat-progress-bar mode="indeterminate" *ngIf="uploadingFile"></mat-progress-bar>
+        <button mat-raised-button (click)="openInput()" style="margin-top: 20px;">Seleccionar Archivo</button>
         <input #fileInput hidden type="file" (change)="fileChange($event.target.files)" accept=".doc,.docx,.pdf">
       </form>
     </div>

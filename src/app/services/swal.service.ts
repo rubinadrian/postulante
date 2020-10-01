@@ -29,7 +29,7 @@ export class SwalService {
     Swal.fire({
       position: 'top-end',
       icon: 'success',
-      title: 'Your work has been saved',
+      title: 'Guardado correctamente!',
       showConfirmButton: false,
       timer: 1500
     })

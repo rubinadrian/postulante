@@ -101,6 +101,8 @@ export class ListaComponent implements OnInit {
         vivienda: false,
         edad_minima: 12,
         edad_maxima: 100,
+        fecha_desde:  [''],
+        fecha_hasta:  [''],
       });
 
       // pairwise devuelve un array con el valor anterior y el nuevo valor

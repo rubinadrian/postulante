@@ -1,7 +1,8 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { SwalService } from '../../../services/swal.service';
 import { CurriculumService } from '../../../services/curriculum.service';
 import { AuthService } from '../../../services/auth.service';
+
 
 @Component({
   selector: 'step-curriculum-file',
@@ -10,6 +11,9 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class ArchivoCurriculumComponent implements OnInit {
   @ViewChild("fileInput") fileInput: ElementRef;
+  @Output() uploading = new EventEmitter<boolean>();
+
+  uploadingFile = false;
 
   constructor(private swal:SwalService,
     private _cs:CurriculumService,
@@ -32,9 +36,14 @@ export class ArchivoCurriculumComponent implements OnInit {
       }
 
       this._auth.getUserLoggedIn.subscribe(user => {
+        this.uploadingFile = true;
+        this.uploading.emit(this.uploadingFile);
         this._cs.saveCurriculum({uid: user.uid, file:file[0]}).subscribe(resp => {
+          this.uploadingFile = false;
+          this.uploading.emit(this.uploadingFile);
           this.fileInput.nativeElement.value = '';
-        });
+        },
+        error => this.swal.error('File Upload', 'Error al subir el arhcivo.'));
       });
 
 
