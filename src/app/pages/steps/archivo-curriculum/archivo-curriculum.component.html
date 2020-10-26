@@ -1,8 +1,13 @@
-<h3>Curr&iacute;culum</h3>
+<h3 class="title_step">Curr&iacute;culum</h3>
 
 <div class="body_step">
   <div class="cont_img_step">
       <img src="assets/images/curriculum.jpg">
+
+      <div class="line_dato_personal bgcolor4 noprint" style="margin-top: 20px" *ngIf="_auth.isAdmin && filename" (click)="downloadCurriculum()">
+        <mat-icon>cloud_download</mat-icon>
+        <span>Download</span>
+      </div>
   </div>
 
   <div class="cont_form_step" style="flex-grow: 8;">
@@ -18,6 +23,9 @@
         <input #fileInput hidden type="file" (change)="fileChange($event.target.files)" accept=".doc,.docx,.pdf">
       </form>
     </div>
+
   </div>
+
+
 </div>
 

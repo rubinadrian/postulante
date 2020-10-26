@@ -1,0 +1,145 @@
+<app-header></app-header>
+
+<div class="main-back-container" *ngIf="p">
+  <div class="main-container">
+    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+
+    <div class="cont">
+      <div class="cont_izq">
+
+        <div class="cont_imagen"  *ngIf="profileImagenBase64">
+          <img [src]="profileImagenBase64" width="150" height="150" />
+        </div>
+
+        <div class="cont_noimage" *ngIf="!profileImagenBase64">
+          <mat-icon >account_circle</mat-icon>
+        </div>
+
+
+        <div class="titulo">{{ p.nombre | titlecase  }}  {{ p.apellido | titlecase  }}</div>
+
+        <div class="line_dato_personal bgcolor1">
+          <mat-icon>location_on</mat-icon>
+          <div>
+            <span>{{ p.domicilio | titlecase  }}</span><br>
+            <span>{{ getLocalidadNombre(p.localidad_id) | titlecase  }}</span>
+            <span> - </span>
+            <span>{{ getProvinciaNombre(p.provincia_id) | titlecase  }}</span>
+          </div>
+        </div>
+        <div class="line_dato_personal bgcolor2">
+          <mat-icon>call</mat-icon>
+          <span>{{ p.celular }}</span>
+        </div>
+
+        <div class="line_dato_personal  bgcolor3">
+          <mat-icon>email</mat-icon>
+          <span>{{ p.email | lowercase  }}</span>
+        </div>
+
+        <div class="line_dato_personal  bgcolor4 noprint" *ngIf="p.curriculum_file" (click)="getCurriculumFile()">
+          <mat-icon>cloud_download</mat-icon>
+          <span>Curriculum File</span>
+        </div>
+
+      </div>
+
+      <div class="cont_der">
+
+        <h1>Estudios</h1>
+
+        <mat-table [dataSource]="dataSourceEstudios" >
+
+          <ng-container matColumnDef="nivel_estudio_id">
+            <mat-header-cell *matHeaderCellDef>Nivel</mat-header-cell>
+            <mat-cell *matCellDef="let estudio"> {{getNivelText(estudio.nivel_estudio_id)}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="institucion">
+            <mat-header-cell *matHeaderCellDef>Instituci&oacute;n</mat-header-cell>
+            <mat-cell *matCellDef="let estudio"> {{ estudio.institucion }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="titulo">
+            <mat-header-cell *matHeaderCellDef>T&iacute;tulo</mat-header-cell>
+            <mat-cell *matCellDef="let estudio"> {{estudio.titulo}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="completo" >
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let estudio" style="justify-content: flex-end;" title="{{estudio.completo?'completo':''}}">
+              <mat-icon *ngIf="estudio.completo">done</mat-icon>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumnsEstudios"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsEstudios;"></mat-row>
+        </mat-table>
+
+        <h1>Experiencias</h1>
+
+        <mat-table [dataSource]="dataSourceExperiencias" >
+
+          <ng-container matColumnDef="empresa">
+            <mat-header-cell *matHeaderCellDef>Empresa</mat-header-cell>
+            <mat-cell *matCellDef="let experiencia"> {{experiencia.empresa}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="funcion">
+            <mat-header-cell *matHeaderCellDef>Funcion</mat-header-cell>
+            <mat-cell *matCellDef="let experiencia"> {{experiencia.funcion}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="fecha_inicio">
+            <mat-header-cell *matHeaderCellDef>Inicio</mat-header-cell>
+            <mat-cell *matCellDef="let experiencia"> {{ experiencia.fecha_inicio | date:'dd/MM/yyyy'}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="fecha_fin">
+            <mat-header-cell *matHeaderCellDef>Fin</mat-header-cell>
+            <mat-cell *matCellDef="let experiencia"> {{ experiencia.fecha_fin | date:'dd/MM/yyyy' }} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumnsExperiencias"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsExperiencias;" title="Observacion: {{ row.observacion }}"></mat-row>
+        </mat-table>
+
+        <h1>Referencias</h1>
+
+        <mat-table [dataSource]="dataSourceReferencias" >
+
+          <ng-container matColumnDef="empresa">
+            <mat-header-cell *matHeaderCellDef>Empresa</mat-header-cell>
+            <mat-cell *matCellDef="let referencia"> {{referencia.empresa}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="contacto">
+            <mat-header-cell *matHeaderCellDef>Contacto</mat-header-cell>
+            <mat-cell *matCellDef="let referencia"> {{referencia.contacto}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="telefono">
+            <mat-header-cell *matHeaderCellDef>Tel&eacute;fono</mat-header-cell>
+            <mat-cell *matCellDef="let referencia"> {{referencia.telefono}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumnsReferencias"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsReferencias;" title="Observacion: {{ row.observacion }}"></mat-row>
+        </mat-table>
+
+
+        <h1>Preferencias</h1>
+
+        <mat-chip-list>
+          <mat-chip *ngFor="let pref of p.preferencias">
+            {{pref.nombre}}
+          </mat-chip>
+        </mat-chip-list>
+
+      </div>
+
+
+    </div>
+
+  </div>
+</div>

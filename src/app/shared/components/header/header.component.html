@@ -3,17 +3,14 @@
       <img src="assets/images/logoUNION.png" width="100">
       <span class="spacer"></span>
 
-      <ng-container *ngIf="_auth.logueado">
+      <ng-container *ngIf="_auth.logged">
+        <span class="arroba">@</span>
         <mat-icon [matMenuTriggerFor]="menu" class="icon_avatar">account_circle</mat-icon>
 
         <mat-menu #menu="matMenu" class="mat-menu-bg-grey">
-          <button mat-menu-item [routerLink]="'/home'" *ngIf="isAdmin()">
-            <mat-icon>home</mat-icon>
-            <span>Home</span>
-          </button>
           <button mat-menu-item [routerLink]="'/areacoopunion'" *ngIf="isAdmin()">
             <mat-icon>list</mat-icon>
-            <span>Area CoopUnion</span>
+            <span>Areas CoopUnion</span>
           </button>
           <button mat-menu-item [routerLink]="'/areaestudio'" *ngIf="isAdmin()">
             <mat-icon>list</mat-icon>
@@ -26,6 +23,10 @@
           <button mat-menu-item [routerLink]="'/lista'" *ngIf="isAdmin()">
             <mat-icon>filter_alt</mat-icon>
             <span>Lista</span>
+          </button>
+          <button mat-menu-item [routerLink]="'/usuario'" *ngIf="isAdmin()">
+            <mat-icon>miscellaneous_services</mat-icon>
+            <span>Usuarios</span>
           </button>
           <!-- <mat-divider></mat-divider> -->
           <button mat-menu-item  (click)="_auth.logout()">

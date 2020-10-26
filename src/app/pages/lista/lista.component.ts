@@ -162,8 +162,12 @@ export class ListaComponent implements OnInit {
       };
     }
 
-    showPostulante(row) {
-      this.router.navigate(['home', row.id]).then();
+    previewPostulante(row) {
+      this.router.navigate(['preview', row.id]).then();
+    }
+
+    editPostulante(row) {
+      this.router.navigate(['postulante', row.id]).then();
     }
 
 }

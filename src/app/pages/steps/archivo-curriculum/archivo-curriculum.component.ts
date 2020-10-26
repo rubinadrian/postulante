@@ -13,18 +13,22 @@ export class ArchivoCurriculumComponent implements OnInit {
   @ViewChild("fileInput") fileInput: ElementRef;
   @Output() uploading = new EventEmitter<boolean>();
 
+  filename;
   uploadingFile = false;
 
   constructor(private swal:SwalService,
     private _cs:CurriculumService,
-    private _auth:AuthService) { }
+    public _auth:AuthService) { }
 
   ngOnInit(): void {
-
   }
 
   openInput() {
     this.fileInput.nativeElement.click();
+  }
+
+  downloadCurriculum() {
+    this._cs.downloadCurriculumFile(this.filename);
   }
 
   fileChange(file:File[]) {
@@ -36,14 +40,18 @@ export class ArchivoCurriculumComponent implements OnInit {
       }
 
       this._auth.getUserLoggedIn.subscribe(user => {
+        this.filename = '';
         this.uploadingFile = true;
         this.uploading.emit(this.uploadingFile);
-        this._cs.saveCurriculum({uid: user.uid, file:file[0]}).subscribe(resp => {
+        this._cs.saveCurriculum({uid: user.uid, file:file[0]}).subscribe((resp:any) => {
+          if(resp.ok) {
+            this.filename = resp.filename;
+          }
           this.uploadingFile = false;
           this.uploading.emit(this.uploadingFile);
           this.fileInput.nativeElement.value = '';
         },
-        error => this.swal.error('File Upload', 'Error al subir el arhcivo.'));
+        error => this.swal.error('File Upload', 'Ocurrio un error, vuelve a intentarlo mas tarde.'));
       });
 
 

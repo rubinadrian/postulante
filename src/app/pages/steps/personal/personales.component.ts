@@ -40,8 +40,8 @@ export class PersonalesComponent implements OnInit {
               private swal:SwalService,
               private _auth:AuthService) {
       const currentYear = new Date().getFullYear();
-      _provinciasService.getProvincias().subscribe(resp => this.provincias = resp);
-      _generos.getGeneros().subscribe(resp => this.generos = resp);
+      this._provinciasService.getProvincias().subscribe(resp => this.provincias = resp);
+      this._generos.getGeneros().subscribe(resp => this.generos = resp);
     }
 
   ngOnInit(): void {
@@ -66,9 +66,9 @@ export class PersonalesComponent implements OnInit {
   }
 
   public setFormValues(data) {
-    if(data.keyfirestore) {
-      this.uid = data.keyfirestore;
-      this.storeService.getImageProfile(data.keyfirestore).subscribe(resp => this.profileImagenBase64 =resp);
+    if(data.uid_fb) {
+      this.uid = data.uid_fb;
+      this.storeService.getImageProfile(data.uid_fb).subscribe(resp => this.profileImagenBase64 =resp);
     } else {
       this.uid = this._auth.user.uid;
     }
@@ -112,7 +112,6 @@ export class PersonalesComponent implements OnInit {
     return resp;
   }
 
-  // Es un metodo que retorna un validador, por eso lleva los parentesis al utilizarlo.
   validarLocalidad(): ValidatorFn {
     return (control: AbstractControl): {[key: string]: any} | null => {
       return this.localidades.find(loc => loc.id === control.value) ? null : {'No es un elemento de la lista': {value: control.value}};

@@ -18,8 +18,6 @@
   }
 }
 
-
-
 .container-list {
   min-height: 600px;
   background-color: white;
@@ -54,5 +52,12 @@ table {
 tr.mat-row:hover, tr.mat-footer-row:hover {
   background-color: whitesmoke;
   cursor:pointer;
+}
+
+.titulo_seccion {
+  font-weight: 400;
+  /* text-decoration: underline; */
+  color: peru;
+  font-family: 'Baloo';
 }
 

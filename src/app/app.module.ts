@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -7,7 +7,7 @@ import { MaterialModule } from './shared/material/material.module';
 import { RoutesModule } from './routes/routes.module';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
-import { HomeComponent } from "./pages/home/home.component";
+import { PostulanteComponent } from "./pages/postulante/postulante.component";
 import { PersonalesComponent } from './pages/steps/personal/personales.component';
 import { FamiliaresComponent } from './pages/steps/familiares/familiares.component';
 import { EstudiosComponent } from './pages/steps/estudios/estudios.component';
@@ -16,7 +16,7 @@ import { PreferenciasComponent } from './pages/steps/preferencias/preferencias.c
 
 import { ModalHermanoComponent } from './pages/steps/familiares/modal.hermano.component';
 import { ModalHijoComponent } from './pages/steps/familiares/modal.hijo.component';
-import { HeaderComponent } from './pages/header/header.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 import { ModalEstudioComponent } from './pages/steps/estudios/modal.estudio.component';
 import { ModalReferenciaComponent } from './pages/steps/experiencias/modal.referencia.component';
 import { ModalExperienciaComponent } from './pages/steps/experiencias/modal.experiencia.component';
@@ -45,6 +45,10 @@ import { AreaEstudioComponent } from './pages/area-estudio/area-estudio.componen
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 import { ModalAreasComponent } from './shared/components/modal-areas/modal-areas.component';
 import { ArchivoCurriculumComponent } from './pages/steps/archivo-curriculum/archivo-curriculum.component';
+import { UsuarioComponent } from './pages/usuario/usuario.component';
+// import { AuthService } from './services/auth.service';
+import { AppInitService } from './app-init.service';
+import { PreviewComponent } from './pages/preview/preview.component';
 
 firebase.initializeApp(environment.firebase);
 //--------
@@ -63,12 +67,18 @@ const MY_DATE_FORMATS = {
  };
 
 
+export function initializeApp1(appInitService: AppInitService) {
+  return (): Promise<any> => {
+    return appInitService.Init();
+  }
+}
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    PostulanteComponent,
     HeaderComponent,
     PersonalesComponent,
     FamiliaresComponent,
@@ -90,6 +100,8 @@ const MY_DATE_FORMATS = {
     SpinnerComponent,
     ModalAreasComponent,
     ArchivoCurriculumComponent,
+    UsuarioComponent,
+    PreviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,6 +117,12 @@ const MY_DATE_FORMATS = {
     MatCarouselModule.forRoot(),
   ],
   providers: [
+    AppInitService,
+    {
+        provide: APP_INITIALIZER,
+        useFactory: initializeApp1,
+        deps: [AppInitService],
+        multi: true},
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

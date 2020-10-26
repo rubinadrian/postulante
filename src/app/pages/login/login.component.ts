@@ -36,7 +36,10 @@ export class LoginComponent implements OnInit {
   constructor(public _auth: AuthService, public router:Router) {
     this._auth.getUserLoggedIn.subscribe((user:any) => {
       if(user) {
-        this.router.navigate(['home']);
+        if(_auth.isAdmin) {
+          return this.router.navigate(['lista']);
+        }
+        this.router.navigate(['postulante']);
       }
     });
 
@@ -71,7 +74,7 @@ export class LoginComponent implements OnInit {
 
   sendPasswordResetEmail() {
     let c = this.form_login_email.value; // credentials
-    this._auth._auth.sendPasswordResetEmail(c.email)
+    this._auth._af.sendPasswordResetEmail(c.email)
       .then(result => {
         this.errorUserPassword = false;
         Swal.fire({
@@ -86,14 +89,14 @@ export class LoginComponent implements OnInit {
   createUserWithEmailAndPassword() {
     this.errorUserPassword = false;
     let c = this.form_login_email.value; // credentials
-    this._auth._auth.createUserWithEmailAndPassword(c.email, c.password)
+    this._auth._af.createUserWithEmailAndPassword(c.email, c.password)
       .catch(err => this.error = err.message);
   }
 
   signInWithEmailAndPassword() {
     this.errorUserPassword = false;
     let c = this.form_login_email.value; // credentials
-    this._auth._auth.signInWithEmailAndPassword(c.email, c.password)
+    this._auth._af.signInWithEmailAndPassword(c.email, c.password)
       .catch(err => {
         this.errorUserPassword = true;
         this.error = 'email/password no es correcto.';

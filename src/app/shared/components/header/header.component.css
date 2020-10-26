@@ -5,7 +5,10 @@
 .mat-menu-panel {
   border-radius: 0px !important;
 }
-
+.arroba {
+  font-family: 'Baloo';
+  opacity: 0;
+}
 
 .mat-icon {
   margin-top: -4px;;

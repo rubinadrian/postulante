@@ -9,19 +9,19 @@ import { FamiliaresComponent } from '../steps/familiares/familiares.component';
 import { EstudiosComponent } from '../steps/estudios/estudios.component';
 import { ExperienciasComponent } from '../steps/experiencias/experiencias.component';
 import { PreferenciasComponent } from '../steps/preferencias/preferencias.component';
-// import { ArchivoCurriculumComponent } from '../steps/archivo-curriculum/archivo-curriculum.component';
+import { ArchivoCurriculumComponent } from '../steps/archivo-curriculum/archivo-curriculum.component';
 
 import { PostulanteService } from 'src/app/services/postulante.service';
-import { AuthService } from '../../services/auth.service';
-import { SwalService } from '../../services/swal.service';
-import { SizeScreenService } from '../../services/size-screen.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { SwalService } from 'src/app/services/swal.service';
+import { SizeScreenService } from 'src/app/services/size-screen.service';
 
 
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-postulante',
+  templateUrl: './postulante.component.html',
+  styleUrls: ['./postulante.component.css'],
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,
@@ -29,7 +29,7 @@ import { SizeScreenService } from '../../services/size-screen.service';
     },
   ],
 })
-export class HomeComponent implements OnInit {
+export class PostulanteComponent implements OnInit {
   loading = true;
   estado;
   uid;
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(EstudiosComponent) stepEstudios: EstudiosComponent;
   @ViewChild(ExperienciasComponent) stepExperiencias: ExperienciasComponent;
   @ViewChild(PreferenciasComponent) stepPreferencias: PreferenciasComponent;
-  // @ViewChild(ArchivoCurriculumComponent) stepArchivoCurriculum: ArchivoCurriculumComponent;
+  @ViewChild(ArchivoCurriculumComponent) stepArchivoCurriculum: ArchivoCurriculumComponent;
   @ViewChild('stepper') stepper: MatStepper;
 
   constructor(
@@ -106,6 +106,7 @@ export class HomeComponent implements OnInit {
     this.stepEstudios.setFormValues(data.postulante);
     this.stepExperiencias.setFormValues(data.postulante);
     this.stepPreferencias.setFormValues(data.postulante);
+    this.stepArchivoCurriculum.filename = data.postulante.curriculum_file;
   }
 
   terminoAnimacion() {
@@ -148,6 +149,17 @@ export class HomeComponent implements OnInit {
 
 
   savePostulante() {
+
+    if(!this.formStepPersonal.valid) {
+      this.stepper.selectedIndex = 0;
+      return;
+    }
+
+    if(!this.formStepFamiliares.valid) {
+      this.stepper.selectedIndex = 1;
+      return;
+    }
+
     this._auth.getUserLoggedIn.subscribe((user:any) => {
       if(user) {
 
