@@ -1,14 +1,15 @@
-.bgcolor1 {
-  background-color: #6b6966;
-}
+/* COLORES FONDOS PRINCIPALES */
+/*
+#6b6966;
+#978f85;
+#e0ddd5;
+*/
 
-.bgcolor2 {
-  background-color: #978f85;
-}
-
-.bgcolor3 {
-  background-color: #e0ddd5;
-}
+/* COLORES PREVIEW DATA */
+.bgcolor1 { background-color: #541f4f; color: white}
+.bgcolor2 { background-color: #7a1833; color: white}
+.bgcolor3 { background-color: #cd313d; color: white}
+.bgcolor4 { background-color: #f05636; color: white}
 
 
 
@@ -44,7 +45,7 @@ html, body { height: 100%; }
 body { margin: 0;
   font-family: 'Roboto', "Helvetica Neue", sans-serif;
   background-color: #e0ddd5;
-  color: rgb(97, 97, 97);
+  color: #616161;
 }
 
 .cont_flex_line {
@@ -62,7 +63,7 @@ body { margin: 0;
 /* Header */
 
 .mat-toolbar.header {
-  background:rgba(29, 29, 29, 0.6);
+  background: #6b6966;
   border-bottom: 35px solid #978f85;
   min-height: 160px;
   padding: 0px;
@@ -204,12 +205,12 @@ body { margin: 0;
 
 .mat-table .mat-cell {
   font-family: 'Roboto';
-  color: rgba(0,0,0,0.54);
+  color: #757575;
   font-size: 12px;
 }
 
 .mat-table .mat-header-cell {
-  color: rgba(0, 0, 0, 0.60);
+  color: #676767;
   font-weight: 700;
 }
 
@@ -304,7 +305,7 @@ body { margin: 0;
 }
 
 
-.bgcolor1 { background-color: #541f4f; color: white}
-.bgcolor2 { background-color: #7a1833; color: white}
-.bgcolor3 { background-color: #cd313d; color: white}
-.bgcolor4 { background-color: #f05636; color: white}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

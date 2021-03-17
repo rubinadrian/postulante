@@ -2,8 +2,9 @@
 @media print {
   .cont-filtros {padding: 0px !important; margin: 0px !important;}
   .mat-divider, .mat-form-field { display: none !important;}
+  .mat-header-cell button { display: none; visibility: hidden;}
   .cont_table { padding: 0px !important;}
-  table {
+  table, .main-container  {
     position: absolute;
     padding: 0px;
     margin: 0px;

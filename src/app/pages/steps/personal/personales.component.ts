@@ -88,10 +88,15 @@ export class PersonalesComponent implements OnInit {
 
   // Habilita el control localidad, al seleccionar una provincia
   onSelectProvincia(event) {
-    this._localidadesService.getLocalidades(this.formStepPersonal.controls.provincia_id.value)
-      .subscribe(resp => this.localidades = resp);
+    this.localidades = [];
     this.formStepPersonal.controls.localidad_id.reset();
-    this.formStepPersonal.controls.localidad_id.enable();
+    this.formStepPersonal.controls.localidad_id.disable();
+    this._localidadesService.getLocalidades(this.formStepPersonal.controls.provincia_id.value)
+      .subscribe(resp => {
+        this.localidades = resp;
+        this.formStepPersonal.controls.localidad_id.setValue('');
+        this.formStepPersonal.controls.localidad_id.enable();
+      });
   }
 
   // Selecciona la primer coincidencia en la localidad.

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { PageEvent } from '@angular/material/paginator';
 // RXJS
 import { Observable } from 'rxjs/internal/Observable';
 import { startWith, map, pairwise } from 'rxjs/operators';
@@ -36,6 +37,10 @@ export class ListaComponent implements OnInit {
   areas_coopunion = [];
   generos = [];
 
+  listlength = 0;
+  pageSize = 100;
+  pageIndex = 0;
+  pageSizeOptions: number[] = [10,50,100,200,500];
 
 
   displayedColumns: string[] = ['nombre', 'apellido', 'email', 'celular', 'tools'];
@@ -55,7 +60,8 @@ export class ListaComponent implements OnInit {
               private _areasLaboralesService: AreasLaboralesService,
               private _areasEstudiosService: AreasEstudioService,
               private _areasCoopunion:AreasCoopunionService,
-              private router:Router) {
+              private router:Router,
+              private ref: ChangeDetectorRef) {
 
     this._provinciasService.getProvincias().subscribe(resp => this.provincias = resp);
     this._generos.getGeneros().subscribe(resp => this.generos = resp);
@@ -68,30 +74,40 @@ export class ListaComponent implements OnInit {
   getLastStatus() {
     let ls = window.localStorage.getItem('filtros');
     if(ls) {
-      let {filtros, data} = JSON.parse(ls);
+      let {filtros, query} = JSON.parse(ls);
       if(filtros.provincia_id) {
         this.onSelectProvincia(filtros.provincia_id);
       }
       this.formFilters.patchValue(filtros);
-      this.dataSource = new MatTableDataSource(data);
+      this.setTableAndPaginator(query);
     }
   }
 
-  saveLastStatus(filtros, data) {
-    window.localStorage.setItem('filtros', JSON.stringify({filtros, data}));
+  saveLastStatus(filtros, query) {
+    window.localStorage.setItem('filtros', JSON.stringify({filtros, query}));
   }
 
   filterCurriculums() {
-    this._ps.getPostulantes(this.formFilters.value).subscribe(resp => {
-      this.saveLastStatus(this.formFilters.value, resp);
-      this.dataSource = new MatTableDataSource(resp);
+    let data = this.formFilters.value;
+    data.page = +this.pageIndex + 1;
+    data.per_page = +this.pageSize;
+    this._ps.getPostulantes(data).subscribe(query => {
+      this.saveLastStatus(this.formFilters.value, query);
+      this.setTableAndPaginator(query);
     });
+  }
+
+  private setTableAndPaginator(query) {
+    this.dataSource = new MatTableDataSource(query.data);
+    this.listlength = query.total;
+    this.pageIndex = query.current_page - 1;
+    this.pageSize = query.per_page;
   }
 
   ngOnInit(): void {
        this.formFilters = this._formBuilder.group({
         provincia_id: [''],
-        localidad_id: [{ value: '', disabled: true }, [this.validarLocalidad()]],
+        localidad_id: [{ value: '', disabled: true }],
         genero_id: [''],
         nivel_estudio_id: [''],
         area_laboral: [''],
@@ -131,10 +147,15 @@ export class ListaComponent implements OnInit {
 
     // Habilita el control localidad, al seleccionar una provincia
     onSelectProvincia(provincia_id) {
-      this._localidadesService.getLocalidades(provincia_id)
-        .subscribe(resp => this.localidades = resp);
+      this.localidades = [];
       this.formFilters.controls.localidad_id.reset();
-      this.formFilters.controls.localidad_id.enable();
+      this.formFilters.controls.localidad_id.disable();
+      this._localidadesService.getLocalidades(provincia_id)
+        .subscribe(resp => {
+          this.localidades = resp;
+          this.formFilters.controls.localidad_id.setValue('');
+          this.formFilters.controls.localidad_id.enable();
+        });
     }
 
     // Selecciona la primer coincidencia en la localidad.
@@ -168,6 +189,12 @@ export class ListaComponent implements OnInit {
 
     editPostulante(row) {
       this.router.navigate(['postulante', row.id]).then();
+    }
+
+    changePage(pageEvent:PageEvent) {
+      this.pageIndex = pageEvent.pageIndex;
+      this.pageSize = pageEvent.pageSize;
+      this.filterCurriculums();
     }
 
 }

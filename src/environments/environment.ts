@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost/postulante/back/public/index.php/api/',
+  url: 'http://localhost:8020/public/index.php/api/',
   firebase: {
     apiKey: "AIzaSyBzUQTB50fuZDZl0tJ89tXhvRV8Qra4Hks",
     authDomain: "curriculum-ad57f.firebaseapp.com",

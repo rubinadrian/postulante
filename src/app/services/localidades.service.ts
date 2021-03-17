@@ -27,7 +27,14 @@ export class LocalidadesService {
       return this.http.post(this.url + 'localidades/' + provincia_id, {})
             .pipe(first((resp:any) => { this.saveLocalidadesInLocalStorage(resp, provincia_id); return resp; }));
     }
-    return new BehaviorSubject(this.localidades).pipe(first());
+
+    // Esta cosa rara que hice, es para cuando haces click en el input autocompletar, que te aparezca la lista completa.
+    // Por alguna razon si es instantaneo, no funciona.
+    let obser = new BehaviorSubject(this.localidades);
+    setTimeout(() => {
+      obser.next(this.localidades);
+    }, 100);
+    return obser;
   }
 
   getLocalidadesFromStorage(provincia_id) {

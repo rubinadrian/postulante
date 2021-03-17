@@ -28,7 +28,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Provincia</mat-label>
+        <mat-label><img src="assets/images/loading2.gif" height="20" width="20" style="float: left;padding-right: 5px;" *ngIf="provincias.length === 0"> <span style="float: left;">Provincia</span> </mat-label>
         <mat-select
           formControlName="provincia_id"
           (selectionChange)="onSelectProvincia($event)"
@@ -44,6 +44,7 @@
       </mat-form-field>
 
       <mat-form-field>
+        <mat-label><img src="assets/images/loading2.gif" height="20" width="20" style="float: left;padding-right: 5px;" *ngIf="localidades.length === 0 && formStepPersonal.controls.provincia_id.value"> <span style="float: left;">Localidad</span> </mat-label>
         <input
           type="text"
           placeholder="Localidad"

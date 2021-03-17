@@ -48,7 +48,9 @@
 
         <h1>Estudios</h1>
 
-        <mat-table [dataSource]="dataSourceEstudios" >
+
+        <div *ngIf="!dataSourceEstudios.data.length">No tiene datos.</div>
+        <mat-table [dataSource]="dataSourceEstudios" *ngIf="dataSourceEstudios.data.length">
 
           <ng-container matColumnDef="nivel_estudio_id">
             <mat-header-cell *matHeaderCellDef>Nivel</mat-header-cell>
@@ -78,7 +80,9 @@
 
         <h1>Experiencias</h1>
 
-        <mat-table [dataSource]="dataSourceExperiencias" >
+
+        <div *ngIf="!dataSourceExperiencias.data.length">No tiene datos.</div>
+        <mat-table [dataSource]="dataSourceExperiencias" *ngIf="dataSourceExperiencias.data.length">
 
           <ng-container matColumnDef="empresa">
             <mat-header-cell *matHeaderCellDef>Empresa</mat-header-cell>
@@ -106,7 +110,9 @@
 
         <h1>Referencias</h1>
 
-        <mat-table [dataSource]="dataSourceReferencias" >
+
+        <div *ngIf="!dataSourceReferencias.data.length">No tiene datos.</div>
+        <mat-table [dataSource]="dataSourceReferencias" *ngIf="dataSourceReferencias.data.length">
 
           <ng-container matColumnDef="empresa">
             <mat-header-cell *matHeaderCellDef>Empresa</mat-header-cell>

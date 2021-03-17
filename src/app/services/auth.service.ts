@@ -10,7 +10,6 @@ import { environment } from '../../environments/environment';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { SwalService } from './swal.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -45,6 +44,7 @@ export class AuthService {
         // Controlamos si es admin desde los Claims
         userFireBase.getIdTokenResult().then(tokenData => {
           this.isAdmin = tokenData.claims.admin || false;
+
           //Obtenemos los datos del usuario
           userFireBase.getIdToken().then(token => {
             this._swal.close();

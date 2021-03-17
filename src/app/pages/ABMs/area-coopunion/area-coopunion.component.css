@@ -1,7 +1,8 @@
 
 @media print {
-  .cont-filtros {padding: 0px !important; margin: 0px !important;}
+  .cont-filtros {padding: 0px !important; margin: 0px !important; }
   .mat-divider, .mat-form-field { display: none !important;}
+  .mat-header-cell button { display: none; visibility: hidden;}
   .cont_table { padding: 0px !important;}
   table, .main-container  {
     position: absolute;
@@ -12,13 +13,11 @@
     top: 0px;
     box-shadow: none;
   }
-  .tools,.mat-paginator {
+  .tools {
     display: none;
     visibility: hidden;
   }
 }
-
-
 
 .container-list {
   min-height: 600px;

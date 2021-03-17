@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { AreasCoopunionService } from '../../services/areas.coopunion.service';
+
 import { MatDialog } from '@angular/material/dialog';
-import { ModalAreasComponent } from '../../shared/components/modal-areas/modal-areas.component';
-import { SwalService } from '../../services/swal.service';
-import { AreasLaboralesService } from '../../services/areas.laborales.service';
+import { ModalAreasComponent } from '../../../shared/components/modal-areas/modal-areas.component';
+import { SwalService } from '../../../services/swal.service';
+import { AreasLaboralesService } from '../../../services/areas.laborales.service';
 
 @Component({
   selector: 'app-area-laboral',
   templateUrl: './area-laboral.component.html',
-  styleUrls: ['./area-laboral.component.css']
+  styleUrls: ['../abm.styles.css']
 })
 export class AreaLaboralComponent implements OnInit {
 

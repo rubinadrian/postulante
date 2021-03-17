@@ -22,9 +22,9 @@ export class PreviewComponent implements OnInit {
 
   id:any;
   loading = true;
-  provincias:any;
-  localidades:any;
-  p:any;
+  provincias = [];
+  localidades = [];
+  p:any; //postulante
   profileImagenBase64:any;
 
   nivelesEstudio = [];
@@ -61,7 +61,7 @@ export class PreviewComponent implements OnInit {
           this.dataSourceEstudios.data = this.p.estudios;
           this.dataSourceExperiencias.data = this.p.experiencias;
           this.dataSourceReferencias.data = this.p.referencias;
-          this._storeService.getImageProfile(this.p.uid_fb).subscribe(resp => this.profileImagenBase64 =resp);
+          this._storeService.getImageProfile(this.p.uid_fb).subscribe(resp => this.profileImagenBase64 =resp, (error) => {});
         });
       }
     });

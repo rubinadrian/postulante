@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { AreasCoopunionService } from '../../services/areas.coopunion.service';
+import { AreasCoopunionService } from '../../../services/areas.coopunion.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalAreasComponent } from '../../shared/components/modal-areas/modal-areas.component';
-import { SwalService } from '../../services/swal.service';
+import { ModalAreasComponent } from '../../../shared/components/modal-areas/modal-areas.component';
+import { SwalService } from '../../../services/swal.service';
 
 @Component({
   selector: 'app-area-coopunion',
   templateUrl: './area-coopunion.component.html',
-  styleUrls: ['./area-coopunion.component.css']
+  styleUrls: ['../abm.styles.css']
 })
 export class AreaCoopunionComponent implements OnInit {
 

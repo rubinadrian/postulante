@@ -6,9 +6,9 @@ import { ListaComponent } from '../pages/lista/lista.component';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { canActivate } from '@angular/fire/auth-guard';
 import { SaludoComponent } from '../pages/saludo/saludo.component';
-import { AreaCoopunionComponent } from '../pages/area-coopunion/area-coopunion.component';
-import { AreaLaboralComponent } from '../pages/area-laboral/area-laboral.component';
-import { AreaEstudioComponent } from '../pages/area-estudio/area-estudio.component';
+import { AreaCoopunionComponent } from '../pages/abms/area-coopunion/area-coopunion.component';
+import { AreaLaboralComponent } from '../pages/abms/area-laboral/area-laboral.component';
+import { AreaEstudioComponent } from '../pages/abms/area-estudio/area-estudio.component';
 import { UsuarioComponent } from '../pages/usuario/usuario.component';
 import { PreviewComponent } from '../pages/preview/preview.component';
 

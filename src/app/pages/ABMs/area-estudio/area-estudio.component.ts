@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalAreasComponent } from '../../shared/components/modal-areas/modal-areas.component';
-import { SwalService } from '../../services/swal.service';
-import { AreasEstudioService } from '../../services/areas.estudio.service';
+import { ModalAreasComponent } from '../../../shared/components/modal-areas/modal-areas.component';
+import { SwalService } from '../../../services/swal.service';
+import { AreasEstudioService } from '../../../services/areas.estudio.service';
 
 
 @Component({
   selector: 'app-area-estudio',
   templateUrl: './area-estudio.component.html',
-  styleUrls: ['./area-estudio.component.css']
+  styleUrls: ['../abm.styles.css']
 })
 export class AreaEstudioComponent implements OnInit {
 
